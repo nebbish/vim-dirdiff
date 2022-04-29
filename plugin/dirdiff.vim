@@ -205,7 +205,7 @@ function! <SID>DirDiff(srcA, srcB)
     let cmdarg = " -r --brief"
 
     if (g:DirDiffIgnoreFileNameCase)
-	let cmdarg = cmdarg." --ignore-file-name-case"
+        let cmdarg = cmdarg." --ignore-file-name-case"
     endif
 
     " If variable is set, we ignore the case
@@ -858,6 +858,7 @@ function! <SID>DirDiffExec(cmd, interactive)
         let shell_save = &shell
         let &shell = g:DirDiffForceShell
     endif
+    echom 'Running:  ' . a:cmd
     if (a:interactive)
         exe (a:cmd)
         let error = v:shell_error
