@@ -63,6 +63,9 @@ endif
 if !exists("g:DirDiffInteractive")
     let g:DirDiffInteractive = 0
 endif
+if !exists("g:DirDiffIgnoreLineEndings")
+    let g:DirDiffIgnoreLineEndings = 0
+endif
 if !exists("g:DirDiffIgnoreCase")
     let g:DirDiffIgnoreCase = 0
 endif
@@ -216,6 +219,9 @@ function! <SID>DirDiff(srcA, srcB)
     endif
 
     " If variable is set, we ignore the case
+    if (g:DirDiffIgnoreLineEndings)
+        let cmdarg = cmdarg." --strip-trailing-cr"
+    endif
     if (g:DirDiffIgnoreCase)
         let cmdarg = cmdarg." -i"
     endif
