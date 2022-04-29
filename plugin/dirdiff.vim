@@ -43,6 +43,9 @@ endif
 "                          let g:DirDiffAddArgs = "-w"
 "
 " You can set the pattern that diff excludes.  Defaults to the CVS directory
+if !exists("g:DirDiffRecursive")
+    let g:DirDiffRecursive = 1
+endif
 if !exists("g:DirDiffExcludes")
     let g:DirDiffExcludes = ""
 endif
@@ -202,7 +205,11 @@ function! <SID>DirDiff(srcA, srcB)
     " Constructs the command line
     let langStr = ""
     let cmd = "!" . g:DirDiffLangString . "diff"
-    let cmdarg = " -r --brief"
+    let cmdarg = " --brief"
+
+    if (g:DirDiffRecursive)
+        let cmdarg = cmdarg." -r"
+    endif
 
     if (g:DirDiffIgnoreFileNameCase)
         let cmdarg = cmdarg." --ignore-file-name-case"
